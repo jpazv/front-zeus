@@ -1,0 +1,51 @@
+.App {
+  text-align: center;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 12;
+  background-image: url('https://exame.com/wp-content/uploads/2021/02/GettyImages-1149947037-1.jpg');
+  background-size: cover;
+}
+
+.inputs input{
+  width: 300px;
+  height: 50px;
+  margin: 10px;
+}
+
+.quantidade {
+  color: rgb(255,255,255)
+}
+
+.botaoComprar {
+  width: 300px;
+  height: 50px;
+  margin: 10px;
+  border-radius: 30px;
+  border-color: rgb(46, 43, 3);
+}
+
+.tabela {
+  margin: 20px;
+}
+
+.tabela {
+  border-collapse: collapse;
+  background:rgba(255,255,255,0.4);
+}
+
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
