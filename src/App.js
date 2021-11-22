@@ -1,12 +1,13 @@
 import './App.css';
-import React, { useState, useEffect, useDebugValue } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 import Axios from 'axios'
-import { format } from 'date-fns'
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios';
+import Editar from '../src/componentes/Editar.js'
+import Ler from '../src/componentes/Ler.js'
+
 
 function initialState() {
   return {
@@ -19,18 +20,15 @@ function initialState() {
 
 function App() {
 
-
   const [todos, setTodos] = useState([]);
   const [item, setItem] = useState(initialState());
-  // const [name, setName] = useState('');
-  // const [price, setPrice] = useState(0);
-  // const [quant, setQuant] = useState(0);
+  const [editItem, setEditItem] = useState(null)
+  const[editData, setEditData] = useState(initialState())
 
 
   useEffect(() => {
     axios.get('http://localhost:3001/racao/get')
       .then(res => {
-        // console.log(res.data)
         setTodos(res.data)
       })
       .catch(err => {
@@ -38,28 +36,62 @@ function App() {
       })
   }, [])
 
-  useEffect(() => {
-    console.log(todos);
-  }, [todos])
-
 
   const post = async () => {
     const valor = item;
     console.log(valor);
     await Axios.post('http://localhost:3001/racao/register', valor).then(() => {
       window.location.reload();
-      console.log('Compra realizada')
+      alert('Compra realizada')
 
     }, (err) => {
       console.log(err)
     })
   }
 
+  const deleteAll = async () => {
+    await Axios.delete('http://localhost:3001/racao/delete').then(() => {
+      window.location.reload();
+      alert('Tabela resetada')
+
+    }, (err) => {
+      console.log(err)
+    })
+  }
+
+  const edit = (event, todo) => {
+    event.preventDefault();
+    setEditItem(todo._id)
+
+    const formatoValores = {
+      name: todo.name,
+      price: todo.price,
+      quantity: todo.quantity
+    }
+
+    setEditData(formatoValores);
+
+  }
+
+  const editFormato = (event) => {
+    event.preventDefault();
+
+    const lugarDoNome = event.target.value('name');
+    const lugarDoValor = event.target.value
+
+    const novoFormato = {...editData}
+    novoFormato[lugarDoNome] = lugarDoValor
+  }
+
+
+  
   return (
     <div className="App">
       <div className='inputs'>
-
-        <h1>ZEUS</h1>
+        <div>
+          <h1>ZEUS</h1>
+          <image className='logo' src='../assets/logo.png' />
+        </div>
 
         <label> Marca da ração </label>
         <input type='text' name='Marca' required='true' placeholder='Digite o nome da ração' onChange={(event) => {
@@ -77,32 +109,42 @@ function App() {
         }} />
 
         <button className='botaoComprar' onClick={post}>Comprar</button>
+        <div className='botaoReset'>
+          <button className='botaoResetar' onClick={deleteAll} >Resetar</button>
+        </div>
 
       </div>
-      <div className='tabela'>
-        <Table className='tabela'>
-          <Thead >
-            <Tr className='cabecalho'>
-              <Th>Marca da ração</Th>
-              <Th>Preço da ração</Th>
-              <Th>Quantidade de pacotes</Th>
-              <Th>Data</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {todos.map(todo => {
-              return (
-                <Tr key={todo._id}>
-                  <Td>{todo.name}</Td>
-                  <Td>{todo.price}</Td>
-                  <Td>{todo.quantity}</Td>
-                  <Td>{todo?.createdAt?.substring(0, 10)}</Td>
-                </Tr>)
-            })}
-          </Tbody>
-        </Table>
+      <div>
+        <form>
+          <Table>
+            <Thead >
+              <Tr>
+                <Th>Marca da ração</Th>
+                <Th>Preço da ração</Th>
+                <Th>Quantidade de pacotes</Th>
+                <Th>Data</Th>
+                <Th>Ações</Th>
+              </Tr>
+            </Thead>
+
+            <Tbody>
+              {todos.map(todo => {
+                return (
+                  <Fragment>
+                    {editItem === todo._id ?( 
+                    <Editar editData= {editData}/> 
+                    ):(
+                     <Ler 
+                     todo={todo} 
+                     edit= {edit} />
+                     )}
+                  </Fragment>
+                )
+              })}
+            </Tbody>
+          </Table>
+        </form>
       </div>
-      <ToastContainer />
     </div>
   );
 }

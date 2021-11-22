@@ -11,6 +11,11 @@
   background-size: cover;
 }
 
+.logo {
+  width: 30px;
+  height: 30px;
+}
+
 .inputs input{
   width: 300px;
   height: 50px;
@@ -21,21 +26,38 @@
   color: rgb(255,255,255)
 }
 
+
+
+.botaoReset {
+  width: '100%';
+  align-self: end;
+}
+
 .botaoComprar {
   width: 300px;
   height: 50px;
   margin: 10px;
   border-radius: 30px;
   border-color: rgb(46, 43, 3);
+  background-color: rgb(69, 22, 100);
 }
 
-.tabela {
-  margin: 20px;
+.botaoResetar {
+  width: 100px;
+  height: 30px;
+  margin: 10px;
+  border-radius: 200px;
+  border-color: rgb(46, 43, 3);
+  background-color: red;
 }
 
-.tabela {
-  border-collapse: collapse;
-  background:rgba(255,255,255,0.4);
+.deletar {
+  width: 100px;
+  height: 30px;
+  margin: 10px;
+  border-radius: 200px;
+  border-color: rgb(46, 43, 3);
+  background-color: rgb(132, 0, 255);
 }
 
 
@@ -48,4 +70,45 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 1rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid #ffffff;
+  text-align: left;
+  padding: 8px;
+  font-size: 32px;
+}
+
+th {
+  background-color: rgb(69, 22, 100);
+}
+
+td {
+  background-color: rgb(87, 76, 126);
+}
+
+form {
+  display: flex;
+}
+
+form td:last-child {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+form * {
+  font-size: 28px;
 }
