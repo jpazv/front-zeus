@@ -4,19 +4,10 @@ import Axios from 'axios'
 
 
 
-function initialState() {
-    return {
-      name: 'Ração',
-      price: 0,
-      quantity: 0,
-    }
-  
-  }
-
 
 const Editar = ( {editData}, cancelar) => {
     
-    const [editar, setEditar] = useState(initialState())
+    const [editar, setEditar] = useState(editData)
 
 
     const patch = async () => {
@@ -69,7 +60,7 @@ const Editar = ( {editData}, cancelar) => {
                 </input>
             </Td>
             <Td>
-=               {editData?.createdAt?.substring(0, 10)}
+              {editData?.createdAt?.substring(0, 10)}
             </Td>
             <Td>
                 <button onClick={patch}>Salvar</button>

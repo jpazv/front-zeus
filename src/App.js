@@ -18,11 +18,7 @@ function initialState() {
 
 }
 
-function initialMontante() {
-  return {
-    montante: 0
-  }
-}
+
 
 function App() {
 
@@ -30,7 +26,7 @@ function App() {
   const [item, setItem] = useState(initialState());
   const [editItem, setEditItem] = useState(null)
   const [editData, setEditData] = useState(initialState())
-  const [total, setTotal] = useState(initialMontante())
+  const [total, setTotal] = useState(0)
 
   const get = () => {
 
@@ -47,7 +43,12 @@ function App() {
   useEffect(() => {
     get()
   }, [])
-
+  
+  useEffect(()=> {
+    if(total != 0) {
+      alert("Você já consumiu " + total)
+    }
+  }, [total])
 
   const post = async () => {
     const valor = item;
@@ -64,7 +65,6 @@ function App() {
   const montante = async () => {
     await Axios.get('http://localhost:3001/racao/'). then((res)=> {
       setTotal(res.data)
-      alert("Você já consumiu " + total)
 
     })
   }
