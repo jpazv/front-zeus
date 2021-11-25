@@ -5,8 +5,12 @@ import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 import Axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios';
+import logo from './logo.png'
 import Editar from '../src/componentes/Editar.js'
 import Ler from '../src/componentes/Ler.js'
+import Card from './componentes/Card'
+import { GiArchiveRegister } from "react-icons/gi"
+import { RiMoneyDollarCircleFill } from "react-icons/ri"
 
 
 function initialState() {
@@ -15,10 +19,7 @@ function initialState() {
     price: 0,
     quantity: 0,
   }
-
 }
-
-
 
 function App() {
 
@@ -43,9 +44,9 @@ function App() {
   useEffect(() => {
     get()
   }, [])
-  
-  useEffect(()=> {
-    if(total != 0) {
+
+  useEffect(() => {
+    if (total !== 0) {
       alert("Você já consumiu " + total)
     }
   }, [total])
@@ -63,21 +64,12 @@ function App() {
   }
 
   const montante = async () => {
-    await Axios.get('http://localhost:3001/racao/'). then((res)=> {
+    await Axios.get('http://localhost:3001/racao/').then((res) => {
       setTotal(res.data)
 
     })
   }
 
-  const deleteAll = async () => {
-    await Axios.delete('http://localhost:3001/racao/delete').then(() => {
-      window.location.reload();
-      alert('Tabela resetada')
-
-    }, (err) => {
-      console.log(err)
-    })
-  }
 
   const edit = (event, todo) => {
     event.preventDefault();
@@ -105,33 +97,16 @@ function App() {
   return (
     <div className="App">
       <div className='inputs'>
+        <div className='nomeLoja'>
+          <img src={logo} width= "120" height="120"/>
+          <label style= {{fontSize: 50}}>Vortex Petshop</label>
+        </div>
         <div>
           <h1>ZEUS</h1>
-          <image className='logo' src='../assets/logo.png' />
         </div>
-
-        <label> Marca da ração </label>
-        <input type='text' name='Marca' required='true' placeholder='Digite o nome da ração' onChange={(event) => {
-          setItem({ ...item, name: event.target.value })
-        }} />
-
-        <label> Preço da ração </label>
-        <input type='number' name='Preço' required='true' placeholder='Digite o preço da ração' onChange={(event) => {
-          setItem({ ...item, price: event.target.value })
-        }} />
-
-        <label className='quantidade'> Quantidade de pacotes </label>
-        <input type='number' name='Quantidade' required='true' placeholder='Digite a quantidade' onChange={(event) => {
-          setItem({ ...item, quantity: event.target.value })
-        }} />
-
-        <button className='botaoComprar' onClick={post}>Comprar</button>
-        <div>
-          <div>
-            <button className='botaoResetar' onClick={deleteAll} >Resetar</button>
-            <button className='botaoMontante' onClick={montante}>Montante</button>
-          </div>
-        </div>
+        <Card item ={item} setItem= {setItem}/>
+        <button className='botaoRegistrar' onClick={post}> <GiArchiveRegister style={{marginRight: 10}}/> Registrar</button>
+        <button className='botaoMontante' onClick={montante}> <RiMoneyDollarCircleFill style={{marginRight: 10}}/>Montante</button>
 
       </div>
       <div>

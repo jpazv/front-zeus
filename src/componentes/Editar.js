@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import { Tr,  Td } from 'react-super-responsive-table'
+import { AiOutlineSave } from "react-icons/ai";
+import { ImCancelCircle } from "react-icons/im";
 import Axios from 'axios'
 
 
@@ -12,8 +14,6 @@ const Editar = ( {editData}, cancelar) => {
 
     const patch = async () => {
         await Axios.patch(`http://localhost:3001/racao/change/${editData._id}`, editar).then(() => {
-        //window.location.reload()
-        //alert("Deu certo")
         }, (err) => {
           console.log(err)
         })
@@ -63,8 +63,8 @@ const Editar = ( {editData}, cancelar) => {
               {editData?.createdAt?.substring(0, 10)}
             </Td>
             <Td>
-                <button onClick={patch}>Salvar</button>
-                <button onClick ={cancelar}> Cancelar</button>
+                <button onClick={patch}><AiOutlineSave/></button>
+                <button onClick ={cancelar}> <ImCancelCircle/></button>
             </Td>
         </Tr>
     )

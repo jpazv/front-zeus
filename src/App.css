@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+.nomeLoja {
+  display: flex;
+  align-self: start;
+  flex-direction: row;
+  align-items: center;
+}
+
 .inputs {
   display: flex;
   flex-direction: column;
@@ -9,6 +16,10 @@
   margin-bottom: 12;
   background-image: url('https://exame.com/wp-content/uploads/2021/02/GettyImages-1149947037-1.jpg');
   background-size: cover;
+}
+
+.icon {
+  margin-right: 30;
 }
 
 .logo {
@@ -20,77 +31,52 @@
   width: 300px;
   height: 50px;
   margin: 10px;
+  border-radius: 11px;
 }
 
 .quantidade {
-  color: rgb(255,255,255)
+  color: rgb(0, 0, 0)
 }
-
 
 .botaoMontante {
   width: 150px;
   height: 40px;
   margin: 10px;
+  margin-left: 90%;
   border-radius: 200px;
   border-color: rgb(46, 43, 3);
   background-color: green;
-  color: #efefef;
+  color: #000000;
   font-size: 1.2rem;
+  box-shadow: 2px 2px 2px rgb(0, 0, 0);
   
 }
 
-.botaoComprar {
+.botaoRegistrar {
   width: 300px;
   height: 50px;
   margin: 10px;
-  border-radius: 30px;
+  border-radius: 6px;
   border-color: rgb(46, 43, 3);
-  background-color: rgb(69, 22, 100);
-  color: #efefef;
+  background-color: rgb(101, 47, 138);
+  color: #000000;
   font-size: 1.8rem;
-}
-
-.botaoResetar {
-  width: 150px;
-  height: 40px;
-  margin: 10px;
-  border-radius: 200px;
-  border-color: rgb(46, 43, 3);
-  background-color: red;
-  font-size: 1.2rem;
-}
-
-.deletar {
-  width: 100px;
-  height: 30px;
-  margin: 10px;
-  border-radius: 200px;
-  border-color: rgb(46, 43, 3);
-  background-color: rgb(132, 0, 255);
+  box-shadow: 1px 1px 1px rgb(0, 0, 0);
 }
 
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+button {
+  background: rgba(0,0,0,0);
+  cursor: pointer;
+  border: 0
 }
 
-.app-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 1rem;
-}
 
 table {
   border-collapse: collapse;
   width: 100%;
+  
 }
 
 th,
@@ -99,16 +85,17 @@ td {
   text-align: left;
   padding: 8px;
   font-size: 32px;
+  border-radius: 11px;
 }
 
 th {
-  background-color: rgb(117, 63, 153);
-  color: #efefef;
+  background-color: rgb(133, 78, 170);
+  color: #000000;
 }
 
 td {
-  background-color: rgb(87, 76, 126);
-  color: #efefef;
+  background-color: rgb(121, 110, 161);
+  color: #000000;
 }
 
 form {
