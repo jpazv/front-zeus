@@ -7,13 +7,16 @@ import Axios from 'axios'
 
 
 
-const Editar = ( {editData}, cancelar) => {
+const Editar = ( {editData, get, cancelar}) => {
     
     const [editar, setEditar] = useState(editData)
 
 
-    const patch = async () => {
+    const patch = async (event) => {
+        event.preventDefault();
         await Axios.patch(`http://localhost:3001/racao/change/${editData._id}`, editar).then(() => {
+            get()
+            cancelar()
         }, (err) => {
           console.log(err)
         })
@@ -63,7 +66,7 @@ const Editar = ( {editData}, cancelar) => {
               {editData?.createdAt?.substring(0, 10)}
             </Td>
             <Td>
-                <button onClick={patch}><AiOutlineSave/></button>
+                <button onClick={(e)=>patch(e)}><AiOutlineSave/></button>
                 <button onClick ={cancelar}> <ImCancelCircle/></button>
             </Td>
         </Tr>

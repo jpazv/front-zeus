@@ -9,7 +9,6 @@ import logo from './logo.png'
 import Editar from '../src/componentes/Editar.js'
 import Ler from '../src/componentes/Ler.js'
 import Card from './componentes/Card'
-import { GiArchiveRegister } from "react-icons/gi"
 import { RiMoneyDollarCircleFill } from "react-icons/ri"
 
 
@@ -28,9 +27,9 @@ function App() {
   const [editItem, setEditItem] = useState(null)
   const [editData, setEditData] = useState(initialState())
   const [total, setTotal] = useState(0)
+  const [modal, setModal] = useState(false)
 
   const get = () => {
-
     axios.get('http://localhost:3001/racao/get')
       .then(res => {
         setTodos(res.data)
@@ -64,6 +63,7 @@ function App() {
   }
 
   const montante = async () => {
+    setTotal(0)
     await Axios.get('http://localhost:3001/racao/').then((res) => {
       setTotal(res.data)
 
@@ -88,7 +88,9 @@ function App() {
   }
 
   const cancelar = () => {
-    return setEditItem(null)
+      setEditItem(null)
+      get()
+  
   }
 
 
@@ -96,20 +98,19 @@ function App() {
 
   return (
     <div className="App">
+      <div className="add-button" onClick={()=>setModal(!modal)}>+</div>
+      <button className='botaoMontante' onClick={montante}> <RiMoneyDollarCircleFill/>Montante</button>
       <div className='inputs'>
         <div className='nomeLoja'>
           <img src={logo} width= "120" height="120"/>
           <label style= {{fontSize: 50}}>Vortex Petshop</label>
         </div>
-        <div>
-          <h1>ZEUS</h1>
-        </div>
-        <Card item ={item} setItem= {setItem}/>
-        <button className='botaoRegistrar' onClick={post}> <GiArchiveRegister style={{marginRight: 10}}/> Registrar</button>
-        <button className='botaoMontante' onClick={montante}> <RiMoneyDollarCircleFill style={{marginRight: 10}}/>Montante</button>
+        <Card id='card' item ={item} setItem= {setItem} post={post} modal={modal} setModal={setModal}/>
+        
 
       </div>
       <div>
+
         <form>
           <Table>
             <Thead >
@@ -127,9 +128,10 @@ function App() {
                 return (
                   <Fragment>
                     {editItem === todo._id ? (
-                      <Editar editData={editData} cancelar={cancelar} />
+                      <Editar editData={editData} cancelar={cancelar} get={get}/>
                     ) : (
                       <Ler
+                        get={get}
                         todo={todo}
                         edit={edit} />
                     )}

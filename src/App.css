@@ -1,7 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
- * {
-  font-family: 'Poppins', sans-serif;
- }
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  zoom: 0.8;
+}
 
 .App {
   text-align: center;
@@ -19,7 +23,8 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 12;
-  background-image: url('https://exame.com/wp-content/uploads/2021/02/GettyImages-1149947037-1.jpg');
+  background-image: url("https://exame.com/wp-content/uploads/2021/02/GettyImages-1149947037-1.jpg");
+  height: 500px;
   background-size: cover;
 }
 
@@ -32,7 +37,7 @@
   height: 30px;
 }
 
-.inputs input{
+.inputs input {
   width: 300px;
   height: 50px;
   margin: 10px;
@@ -40,20 +45,28 @@
 }
 
 .quantidade {
-  color: rgb(0, 0, 0)
+  color: rgb(0, 0, 0);
 }
 
 .botaoMontante {
   width: 150px;
   height: 40px;
-  margin: 10px;
-  margin-left: 90%;
   border-radius: 200px;
   border-color: rgb(46, 43, 3);
   background-color: green;
   color: #000000;
   font-size: 1.2rem;
   box-shadow: 2px 2px 2px rgb(0, 0, 0);
+  position: fixed;
+  bottom: 5vh;
+  right: 15vw;
+  transform: translateY(-50%);
+  transition: 0.2s ease-in-out;
+}
+
+.botaoMontante:hover {
+  filter:brightness(1.2);
+  color: white;
   
 }
 
@@ -63,25 +76,21 @@
   margin: 10px;
   border-radius: 6px;
   border-color: rgb(46, 43, 3);
-  background-color: rgb(101, 47, 138);
+  background-color: #6f4bef;
   color: #000000;
   font-size: 1.8rem;
   box-shadow: 1px 1px 1px rgb(0, 0, 0);
 }
 
-
-
 button {
-  background: rgba(0,0,0,0);
+  background: rgba(0, 0, 0, 0);
   cursor: pointer;
-  border: 0
+  border: 0;
 }
-
 
 table {
   border-collapse: collapse;
   width: 100%;
-  
 }
 
 th,
@@ -90,16 +99,19 @@ td {
   text-align: left;
   padding: 8px;
   font-size: 32px;
-  border-radius: 11px;
+  min-width: 130px;
+}
+td input {
+  width: 90%;
 }
 
 th {
-  background-color: rgb(133, 78, 170);
+  background-color: #6f4bef;
   color: #000000;
 }
 
 td {
-  background-color: rgb(121, 110, 161);
+  background-color: rgb(165, 155, 204);
   color: #000000;
 }
 
@@ -113,5 +125,52 @@ form td:last-child {
 }
 
 form * {
-  font-size: 28px;
+  font-size: 24px;
+}
+.card {
+  position: fixed;
+  top: 50vh;
+  transform: translate(-50%, -50%);
+  background-color: red;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  margin: 20px 0;
+  padding: 30px 15px;
+  border-radius: 20px;
+  display: none;
+  z-index: 2;
+}
+
+.add-button {
+  position: fixed;
+  bottom: 5vh;
+  right: 5vw;
+  font-size: 50px;
+  background-color: #6f4bef;
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  user-select: none;
+  cursor: pointer;
+  z-index: 2;
+  transition: 0.1s ease-in-out;
+}
+.add-button:hover {
+  filter: brightness(0.8);
+  color: white;
+}
+.background {
+  position: fixed;
+  height: 125vh;
+  width: 125vw;
+  background-color: black;
+  filter: opacity(0.5);
+  top: 0;
+  left: 0;
+  display: none;
+  z-index: 1;
+}
+.visible {
+  display: flex;
 }

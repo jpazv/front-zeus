@@ -6,12 +6,12 @@ import {  Tr, Td } from 'react-super-responsive-table'
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 import Axios from 'axios'
 
-const Ler = ({ todo, edit }) => {
+const Ler = ({ todo, edit, get }) => {
     
 
     const deletar = async () => {
         await Axios.delete(`http://localhost:3001/racao/delete/${todo._id}`).then(() => {
-        window.location.reload()
+        get()
         }, (err) => {
           console.log(err)
         })
